@@ -1,0 +1,2156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff3f4">
+  <title>For My Brother ❤️ — A Rakhi Surprise</title>
+  <meta name="description" content="A tiny animated Rakhi movie made with love for my brother.">
+
+  <!-- Cute, readable fonts. The site still works if Google Fonts are unavailable. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #f7a7bd;
+      --peach: #ffc7ad;
+      --cream: #fff8ed;
+      --lavender: #c9b9ef;
+      --sky: #b9e5f6;
+      --gold: #f5c86a;
+      --rose: #e97f9f;
+      --text: #553f52;
+      --muted: #846d80;
+      --white: #fffdfb;
+      --shadow: 0 24px 70px rgba(111, 76, 105, .16);
+      --soft-shadow: 0 12px 34px rgba(111, 76, 105, .13);
+      --radius: 32px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      font-family: "Nunito", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.9), transparent 28%),
+        linear-gradient(145deg, #ffeef2 0%, #fff5e8 45%, #eee9ff 100%);
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 4px solid rgba(233,127,159,.35);
+      outline-offset: 4px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .scene {
+      min-height: 100svh;
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding: clamp(22px, 5vw, 60px) 18px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .scene::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(255,255,255,.72), transparent 24%),
+        radial-gradient(circle at 80% 75%, rgba(201,185,239,.30), transparent 25%),
+        radial-gradient(circle at 20% 75%, rgba(247,167,189,.22), transparent 26%);
+      animation: skyDrift 18s ease-in-out infinite alternate;
+    }
+
+    .cloud {
+      position: absolute;
+      width: 170px;
+      height: 60px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.66);
+      filter: blur(.2px);
+      box-shadow: 0 12px 30px rgba(129,106,145,.08);
+      opacity: .78;
+      z-index: -1;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .cloud::before {
+      width: 82px;
+      height: 82px;
+      left: 30px;
+      bottom: 15px;
+    }
+
+    .cloud::after {
+      width: 62px;
+      height: 62px;
+      right: 25px;
+      bottom: 12px;
+    }
+
+    .cloud.one {
+      top: 11%;
+      left: -45px;
+      animation: cloudFloat 18s ease-in-out infinite;
+    }
+
+    .cloud.two {
+      top: 22%;
+      right: -55px;
+      transform: scale(.78);
+      animation: cloudFloat 22s ease-in-out infinite reverse;
+    }
+
+    .cloud.three {
+      bottom: 12%;
+      left: 6%;
+      transform: scale(.58);
+      animation: cloudFloat 24s ease-in-out infinite;
+    }
+
+    .ambient {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .spark,
+    .heart,
+    .petal {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .spark {
+      color: #fff;
+      filter: drop-shadow(0 0 8px rgba(245,200,106,.9));
+      animation: twinkle 2.7s ease-in-out infinite;
+    }
+
+    .heart {
+      color: var(--rose);
+      font-size: clamp(14px,2vw,25px);
+      opacity: .55;
+      animation: floatHeart 7s ease-in-out infinite;
+    }
+
+    .petal {
+      width: 12px;
+      height: 18px;
+      border-radius: 100% 0 100% 0;
+      background: rgba(233,127,159,.32);
+      transform: rotate(25deg);
+      animation: petalFall 11s linear infinite;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(940px,calc(100% - 28px));
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .progress {
+      pointer-events: auto;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,253,251,.72);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 25px rgba(91,66,86,.10);
+      font-weight: 800;
+      font-size: .84rem;
+      letter-spacing: .03em;
+    }
+
+    .music {
+      pointer-events: auto;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,253,251,.78);
+      box-shadow: 0 8px 25px rgba(91,66,86,.10);
+      cursor: pointer;
+      transition: transform .25s ease,box-shadow .25s ease;
+    }
+
+    .music:hover {
+      transform: translateY(-2px) rotate(-4deg);
+      box-shadow: 0 12px 30px rgba(91,66,86,.16);
+    }
+
+    .story-card {
+      width: min(860px,100%);
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: clamp(26px,6vw,64px);
+      border: 1px solid rgba(255,255,255,.72);
+      background: linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,248,237,.66));
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--rose);
+    }
+
+    h1,
+    h2 {
+      font-family: "Baloo 2",sans-serif;
+      margin: 0;
+      line-height: .98;
+      letter-spacing: -.03em;
+    }
+
+    h1 {
+      font-size: clamp(3rem,10vw,6.6rem);
+    }
+
+    h2 {
+      font-size: clamp(2.35rem,6vw,4.5rem);
+    }
+
+    .script {
+      font-family: "Pacifico",cursive;
+      font-weight: 400;
+      color: var(--rose);
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 20px auto 0;
+      font-size: clamp(1rem,2.4vw,1.2rem);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /*
+      MAIN PERSONAL MESSAGE
+      The message now supports multiple paragraphs.
+    */
+    .editable {
+      margin: 28px auto 0;
+      max-width: 680px;
+      padding: 24px 26px;
+      min-height: 105px;
+      border: 2px dashed rgba(233,127,159,.34);
+      border-radius: 24px;
+      background: rgba(255,255,255,.48);
+      font-weight: 800;
+      color: #806276;
+      line-height: 1.75;
+      text-align: left;
+    }
+
+    .message-paragraph {
+      margin: 0 0 16px;
+    }
+
+    .message-paragraph:last-child {
+      margin-bottom: 0;
+    }
+
+    .btn {
+      margin-top: 28px;
+      border: 0;
+      padding: 14px 24px;
+      min-height: 54px;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: .01em;
+      background: linear-gradient(135deg,var(--rose),#c975a0);
+      box-shadow: 0 12px 26px rgba(201,117,160,.28);
+      cursor: pointer;
+      transition: transform .25s ease,box-shadow .25s ease,filter .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.015);
+      box-shadow: 0 17px 34px rgba(201,117,160,.32);
+      filter: saturate(1.05);
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(.98);
+    }
+
+    .btn.secondary {
+      background: linear-gradient(135deg,#e7b3c8,#b9a7e6);
+    }
+
+    .letter {
+      width: clamp(110px,25vw,175px);
+      aspect-ratio: 1/1;
+      margin: 0 auto 22px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      animation: gentleBob 4.5s ease-in-out infinite;
+    }
+
+    .letter .paper {
+      width: 78%;
+      height: 68%;
+      background: var(--cream);
+      border-radius: 13px;
+      box-shadow: var(--soft-shadow);
+      transform: rotate(-4deg);
+      border: 3px solid rgba(255,255,255,.8);
+      position: relative;
+    }
+
+    .letter .paper::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 31%;
+      height: 4px;
+      border-radius: 99px;
+      background: #eab5c3;
+      box-shadow: 0 14px #ead2d6,0 28px #ead2d6;
+    }
+
+    .letter .seal {
+      position: absolute;
+      right: 3%;
+      bottom: 9%;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--rose);
+      color: white;
+      box-shadow: 0 7px 16px rgba(233,127,159,.35);
+    }
+
+    .scene-inner {
+      width: min(940px,100%);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .gift-wrap {
+      display: grid;
+      place-items: center;
+      margin: 26px 0 8px;
+    }
+
+    .gift {
+      width: min(260px,68vw);
+      aspect-ratio: 1;
+      position: relative;
+      cursor: pointer;
+      filter: drop-shadow(0 22px 25px rgba(112,72,98,.18));
+      animation: giftBounce 3.3s ease-in-out infinite;
+    }
+
+    .gift .box {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: 9%;
+      height: 55%;
+      border-radius: 18px 18px 28px 28px;
+      background: linear-gradient(145deg,#f9a9bf,#e97f9f);
+      box-shadow: inset 0 -10px 0 rgba(160,66,103,.10);
+    }
+
+    .gift .lid {
+      position: absolute;
+      left: 6%;
+      right: 6%;
+      top: 22%;
+      height: 25%;
+      border-radius: 17px;
+      background: linear-gradient(145deg,#ffc6ad,#f5a5a9);
+      transform-origin: 12% 80%;
+      transition: transform .65s cubic-bezier(.2,.9,.2,1);
+      z-index: 2;
+    }
+
+    .gift .ribbon-v,
+    .gift .ribbon-h {
+      position: absolute;
+      background: var(--gold);
+      z-index: 3;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.18);
+    }
+
+    .gift .ribbon-v {
+      width: 17%;
+      height: 67%;
+      left: 41.5%;
+      bottom: 8%;
+    }
+
+    .gift .ribbon-h {
+      height: 18%;
+      left: 6%;
+      right: 6%;
+      top: 26%;
+    }
+
+    .gift .bow {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      width: 95px;
+      height: 55px;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+
+    .bow::before,
+    .bow::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      width: 48px;
+      height: 40px;
+      background: var(--gold);
+      border-radius: 70% 20% 70% 20%;
+    }
+
+    .bow::before {
+      right: 48px;
+      transform: rotate(25deg);
+    }
+
+    .bow::after {
+      left: 48px;
+      transform: scaleX(-1) rotate(25deg);
+    }
+
+    .bow span {
+      position: absolute;
+      left: 50%;
+      top: 12px;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e8b85a;
+    }
+
+    .gift.open .lid {
+      transform: rotate(-18deg) translate(-7px,-17px);
+    }
+
+    .message-chip {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 18px;
+      max-width: 650px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.65);
+      box-shadow: var(--soft-shadow);
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .surprise-frame {
+      width: min(560px,100%);
+      margin: 28px auto 0;
+      padding: 12px;
+      border-radius: 32px;
+      background: linear-gradient(135deg,rgba(255,255,255,.86),rgba(245,200,106,.34),rgba(201,185,239,.55));
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .surprise-frame::after {
+      content: "✦  ♡  ✦";
+      position: absolute;
+      right: -8px;
+      top: -17px;
+      color: var(--gold);
+      font-size: 1.6rem;
+      letter-spacing: .3rem;
+      transform: rotate(8deg);
+    }
+
+    .gif-slot {
+      min-height: 300px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      background:
+        radial-gradient(circle at 30% 25%,rgba(255,255,255,.95),transparent 22%),
+        linear-gradient(145deg,#ffdfe7,#e7dcfa 55%,#d7eff7);
+      overflow: hidden;
+    }
+
+    .gif-slot img {
+      width: 100%;
+      height: 100%;
+      max-height: 460px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .placeholder-art {
+      width: 150px;
+      height: 150px;
+      border-radius: 38% 62% 55% 45%;
+      background: rgba(255,255,255,.56);
+      display: grid;
+      place-items: center;
+      font-size: 4rem;
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.7),
+        0 16px 40px rgba(107,77,109,.1);
+      animation: morph 7s ease-in-out infinite;
+    }
+
+    .gallery-scene {
+      min-height: auto;
+      padding-top: 100px;
+      padding-bottom: 80px;
+    }
+
+    .gallery-intro {
+      max-width: 760px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+
+    .gallery {
+      width: min(1100px,100%);
+      margin: 28px auto 0;
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 26px;
+    }
+
+    .polaroid {
+      padding: 12px 12px 18px;
+      background: #fffdfb;
+      border-radius: 6px 6px 14px 14px;
+      box-shadow: 0 18px 40px rgba(84,63,79,.16);
+      transform: rotate(var(--tilt));
+      transition: transform .35s ease,box-shadow .35s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .polaroid:nth-child(2n) {
+      transform: rotate(calc(var(--tilt) * -1));
+    }
+
+    .polaroid:hover {
+      transform: rotate(0) translateY(-8px) scale(1.025);
+      box-shadow: 0 26px 55px rgba(84,63,79,.22);
+    }
+
+    .photo-placeholder {
+      aspect-ratio: 4/3;
+      width: 100%;
+      border-radius: 4px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg,#ffe0e7,#e9e0ff,#d9f1f7);
+      color: #9a8193;
+      font-weight: 900;
+      position: relative;
+    }
+
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-placeholder::before {
+      content: "✦";
+      position: absolute;
+      top: 10px;
+      right: 13px;
+      color: white;
+      font-size: 1.3rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,.12);
+      z-index: 1;
+    }
+
+    .note {
+      padding: 13px 6px 0;
+      font-family: "Pacifico",cursive;
+      color: #806276;
+      font-size: 1.02rem;
+    }
+
+    .final-card {
+      width: min(820px,100%);
+      margin: 70px auto 0;
+      padding: clamp(28px,6vw,60px);
+      text-align: center;
+      border-radius: 38px;
+      background: linear-gradient(145deg,rgba(255,255,255,.86),rgba(255,241,232,.72));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rakhi {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle,#f5c86a 0 12%,#f8e0a5 13% 20%,transparent 21%),
+        conic-gradient(from 0deg,#f7a7bd,#c9b9ef,#b9e5f6,#f7a7bd);
+      box-shadow:
+        0 0 0 11px rgba(255,255,255,.65),
+        0 16px 40px rgba(111,76,105,.14);
+      animation: spinSlow 14s linear infinite;
+    }
+
+    .rakhi::after {
+      content: "♡";
+      font-size: 2rem;
+      color: #fff;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
+    }
+
+    .made {
+      margin-top: 25px;
+      color: var(--rose);
+      font-weight: 900;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(65,47,62,.55);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .28s ease,visibility .28s ease;
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      width: min(900px,100%);
+      max-height: 92svh;
+      overflow: auto;
+      padding: 14px;
+      border-radius: 28px;
+      background: #fffdfb;
+      box-shadow: 0 30px 90px rgba(40,27,40,.35);
+      transform: translateY(16px) scale(.96);
+      transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .modal.open .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-media {
+      width: 100%;
+      max-height: 68svh;
+      object-fit: contain;
+      border-radius: 20px;
+      background: #f5eef4;
+    }
+
+    .modal-note {
+      padding: 14px 8px 6px;
+      font-family: "Pacifico",cursive;
+      color: #806276;
+      font-size: 1.15rem;
+      text-align: center;
+    }
+
+    .close {
+      float: right;
+      border: 0;
+      background: #f5e8ee;
+      color: var(--text);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .enter {
+      animation: sceneIn .75s cubic-bezier(.2,.85,.2,1) both;
+    }
+
+    .exit {
+      animation: sceneOut .45s ease both;
+    }
+
+    @keyframes sceneIn {
+      from {
+        opacity: 0;
+        transform: translateY(28px) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes sceneOut {
+      to {
+        opacity: 0;
+        transform: translateY(-20px) scale(.98);
+      }
+    }
+
+    @keyframes skyDrift {
+      from {
+        transform: translate3d(-1%,0,0) scale(1);
+      }
+      to {
+        transform: translate3d(1%,1%,0) scale(1.03);
+      }
+    }
+
+    @keyframes cloudFloat {
+      50% {
+        transform: translateX(45px) translateY(10px);
+      }
+    }
+
+    @keyframes gentleBob {
+      50% {
+        transform: translateY(-7px) rotate(1deg);
+      }
+    }
+
+    @keyframes giftBounce {
+      0%,100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+      50% {
+        transform: translateY(-10px) rotate(1deg);
+      }
+    }
+
+    @keyframes twinkle {
+      0%,100% {
+        opacity: .25;
+        transform: scale(.7) rotate(0);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.15) rotate(20deg);
+      }
+    }
+
+    @keyframes floatHeart {
+      0%,100% {
+        transform: translateY(10px) rotate(-5deg);
+        opacity: .2;
+      }
+      50% {
+        transform: translateY(-28px) rotate(8deg);
+        opacity: .7;
+      }
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translate3d(0,-20px,0) rotate(15deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: .55;
+      }
+      100% {
+        transform: translate3d(90px,110vh,0) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes morph {
+      50% {
+        border-radius: 60% 40% 45% 55%;
+        transform: rotate(4deg) scale(1.03);
+      }
+    }
+
+    @keyframes spinSlow {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .scene {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .story-card {
+        border-radius: 26px;
+        padding: 30px 20px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .gallery-scene {
+        padding-top: 86px;
+      }
+
+      .gif-slot {
+        min-height: 250px;
+      }
+
+      .progress {
+        font-size: .75rem;
+        padding: 8px 11px;
+      }
+
+      .music {
+        width: 42px;
+        height: 42px;
+      }
+
+      .editable {
+        padding: 20px;
+        font-size: .95rem;
+        line-height: 1.7;
+      }
+    }
+
+    @media (min-width: 701px) {
+      .gallery .polaroid:nth-child(3n) {
+        margin-top: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================================================================
+       CUSTOMIZATION — YOUR PERSONAL MESSAGE IS ALREADY ADDED HERE
+       ================================================================ -->
+  <script>
+    const rakhiData = {
+
+      brotherName: "Aman Bhaiya",
+
+      mainMessage: `It's been more than a year since we last met, Bhaiya, and my entire feed is filled with Rakhi posts. Every post reminds me of you.
+
+You haven't been home for Rakhi in the last two years, and it really hurts seeing you only on video calls. I miss your teasing, the way you irritate me, and all our little fights.
+
+Your little gudiya misses you so much. I hope next Rakhi we celebrate together instead of through a screen. Love you always, Bhaiya ❤️🤍`,
+
+      messages: [
+        "No matter how far you are, you'll always be my favourite person to fight with. ❤️",
+        "I miss all the silly fights, teasing, laughter, and the little moments we shared.",
+        "Distance may keep us apart, but nothing can change the bond between a brother and his little gudiya. 🤍"
+      ],
+
+      finalMessage: `Bhaiya, I just want you to know that no matter how much time passes or how many miles are between us, you'll always have a special place in my heart.
+
+I miss you more than I can say. I hope we get to celebrate Rakhi together again very soon.
+
+Love you always. ❤️🤍`,
+
+      // Optional: Add your GIF URLs here.
+      gifs: [
+        "images/top.png",
+        "images/sin.png"
+      ],
+
+      // Add your photos here.
+      // Example:
+      // { src: "images/photo1.jpg", note: "Our favourite memory ❤️" }
+      photos: [
+        { src: "images/image1.jpeg", note: "Having you as my brother is like having a built-in best friend, forever partner in crime, and sometimes my biggest headache. 😂❤️ We may fight, annoy each other, and steal each other’s things, but at the end of the day, you’ll always be one of my favorite people" }
+      ],
+
+      // Optional: Add a direct audio URL here.
+      musicUrl: ""
+    };
+  </script>
+
+
+  <!-- TOP CONTROLS -->
+  <div class="topbar" aria-label="Story controls">
+    <div class="progress" id="progress" aria-live="polite">
+      1 / 5 · ♡
+    </div>
+
+    <button
+      class="music"
+      id="musicBtn"
+      type="button"
+      aria-label="Play background music"
+      title="Music"
+    >
+      🎵
+    </button>
+  </div>
+
+
+  <main id="story">
+
+    <!-- ================================================================
+         STAGE 1 — YOUR PERSONAL MESSAGE
+         ================================================================ -->
+    <section
+      class="scene"
+      data-stage="1"
+      aria-labelledby="welcome-title"
+    >
+
+      <div class="ambient" aria-hidden="true"></div>
+
+      <div class="cloud one"></div>
+      <div class="cloud two"></div>
+      <div class="cloud three"></div>
+
+
+      <div class="story-card enter">
+
+        <div class="letter" aria-hidden="true">
+          <div class="paper"></div>
+          <div class="seal">♥</div>
+        </div>
+
+
+        <p class="eyebrow">
+          A tiny Rakhi gift
+        </p>
+
+
+        <h1 id="welcome-title">
+          For My
+          <span class="script">Brother</span>
+          ❤️
+        </h1>
+
+
+        <p class="subtitle">
+          A little surprise made of memories, mischief, magic…
+          and a whole lot of sibling love.
+        </p>
+
+
+        <!-- YOUR MESSAGE APPEARS HERE -->
+        <div
+          class="editable"
+          id="mainMessage"
+          aria-label="Personal message"
+        ></div>
+
+
+        <button
+          class="btn"
+          type="button"
+          data-next
+        >
+          Start the Surprise ✨
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================================================
+         STAGE 2 — GIFT
+         ================================================================ -->
+    <section
+      class="scene hidden"
+      data-stage="2"
+      aria-labelledby="gift-title"
+    >
+
+      <div class="ambient" aria-hidden="true"></div>
+
+      <div class="cloud one"></div>
+      <div class="cloud two"></div>
+
+
+      <div class="scene-inner enter">
+
+        <p class="eyebrow">
+          Chapter two · something is waiting…
+        </p>
+
+
+        <h2 id="gift-title">
+          A Little
+          <span class="script">Gift</span>
+          🎁
+        </h2>
+
+
+        <div class="gift-wrap">
+
+          <div
+            class="gift"
+            id="gift"
+            tabindex="0"
+            role="button"
+            aria-label="Open the gift box"
+          >
+
+            <div class="bow">
+              <span></span>
+            </div>
+
+            <div class="lid"></div>
+
+            <div class="box"></div>
+
+            <div class="ribbon-h"></div>
+
+            <div class="ribbon-v"></div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="message-chip"
+          id="message1"
+        ></div>
+
+
+        <br>
+
+
+        <button
+          class="btn secondary"
+          type="button"
+          data-next
+        >
+          Next Surprise →
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================================================
+         STAGE 3 — SURPRISE ONE
+         ================================================================ -->
+    <section
+      class="scene hidden"
+      data-stage="3"
+      aria-labelledby="gif1-title"
+    >
+
+      <div class="ambient" aria-hidden="true"></div>
+
+      <div class="cloud two"></div>
+      <div class="cloud three"></div>
+
+
+      <div class="scene-inner enter">
+
+        <p class="eyebrow">
+          Chapter three · memory unlocked
+        </p>
+
+
+        <h2 id="gif1-title">
+          Surprise
+          <span class="script">One</span>
+          ✨
+        </h2>
+
+
+        <div class="surprise-frame">
+
+          <div
+            class="gif-slot"
+            id="gifSlot1"
+            aria-label="GIF 1 placeholder"
+          >
+            <div
+              class="placeholder-art"
+              aria-hidden="true"
+            >
+              🎞️
+            </div>
+          </div>
+
+        </div>
+
+
+        <div
+          class="message-chip"
+          id="message2"
+        ></div>
+
+
+        <br>
+
+
+        <button
+          class="btn"
+          type="button"
+          data-next
+        >
+          One More →
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================================================
+         STAGE 4 — SURPRISE TWO
+         ================================================================ -->
+    <section
+      class="scene hidden"
+      data-stage="4"
+      aria-labelledby="gif2-title"
+    >
+
+      <div class="ambient" aria-hidden="true"></div>
+
+      <div class="cloud one"></div>
+      <div class="cloud three"></div>
+
+
+      <div class="scene-inner enter">
+
+        <p class="eyebrow">
+          Chapter four · sibling energy
+        </p>
+
+
+        <h2 id="gif2-title">
+          Surprise
+          <span class="script">Two</span>
+          💕
+        </h2>
+
+
+        <div class="surprise-frame">
+
+          <div
+            class="gif-slot"
+            id="gifSlot2"
+            aria-label="GIF 2 placeholder"
+          >
+            <div
+              class="placeholder-art"
+              aria-hidden="true"
+            >
+              🌸
+            </div>
+          </div>
+
+        </div>
+
+
+        <div
+          class="message-chip"
+          id="message3"
+        ></div>
+
+
+        <br>
+
+
+        <button
+          class="btn"
+          type="button"
+          id="finalBtn"
+        >
+          Final Surprise 🎁✨
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================================================
+         STAGE 5 — MEMORY GALLERY
+         ================================================================ -->
+    <section
+      class="scene gallery-scene hidden"
+      id="galleryStage"
+      aria-labelledby="gallery-title"
+    >
+
+      <div class="ambient" aria-hidden="true"></div>
+
+      <div class="cloud one"></div>
+      <div class="cloud two"></div>
+      <div class="cloud three"></div>
+
+
+      <div class="gallery-intro enter">
+
+        <p class="eyebrow">
+          The memory reel · just us
+        </p>
+
+
+        <h2 id="gallery-title">
+          Our Little
+          <span class="script">Universe</span>
+          📸
+        </h2>
+
+
+        <p class="subtitle">
+          Four tiny windows into the chaos, laughter, and moments
+          that make being siblings feel like its own kind of magic.
+        </p>
+
+      </div>
+
+
+      <div
+        class="gallery"
+        id="gallery"
+      ></div>
+
+
+      <div class="final-card enter">
+
+        <div
+          class="rakhi"
+          aria-hidden="true"
+        ></div>
+
+
+        <p class="eyebrow">
+          And finally…
+        </p>
+
+
+        <h2>
+          Happy Raksha Bandhan,
+          <span
+            class="script"
+            id="brotherName"
+          ></span>
+          ❤️
+        </h2>
+
+
+        <div
+          class="editable"
+          id="finalMessage"
+        ></div>
+
+
+        <div class="made">
+          Made with love By Anchal 💕
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================================================================
+       PHOTO LIGHTBOX
+       ================================================================ -->
+  <div
+    class="modal"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalLabel"
+  >
+
+    <div class="modal-box">
+
+      <button
+        class="close"
+        id="closeModal"
+        type="button"
+        aria-label="Close photo"
+      >
+        ×
+      </button>
+
+
+      <span
+        id="modalLabel"
+        class="hidden"
+      >
+        Memory photo
+      </span>
+
+
+      <div id="modalMedia"></div>
+
+
+      <div
+        class="modal-note"
+        id="modalNote"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- BACKGROUND MUSIC -->
+  <audio
+    id="bgMusic"
+    loop
+    preload="none"
+  ></audio>
+
+
+  <script>
+    (() => {
+
+      const $ = (sel, root = document) =>
+        root.querySelector(sel);
+
+      const $$ = (sel, root = document) =>
+        [...root.querySelectorAll(sel)];
+
+
+      const stages = $$("[data-stage]");
+
+      const galleryStage =
+        $("#galleryStage");
+
+      const progress =
+        $("#progress");
+
+      const musicBtn =
+        $("#musicBtn");
+
+      const bgMusic =
+        $("#bgMusic");
+
+      const lightbox =
+        $("#lightbox");
+
+      const modalMedia =
+        $("#modalMedia");
+
+      const modalNote =
+        $("#modalNote");
+
+
+      /*
+        ---------------------------------------------------------------
+        PERSONAL MESSAGE RENDERING
+        ---------------------------------------------------------------
+        This converts blank lines in your message into separate
+        paragraphs so the message looks beautiful inside the card.
+      */
+
+      function renderMessage(element, text) {
+
+        element.innerHTML = "";
+
+        const paragraphs =
+          text.trim().split(/\n\s*\n/);
+
+        paragraphs.forEach(paragraph => {
+
+          const p =
+            document.createElement("p");
+
+          p.className =
+            "message-paragraph";
+
+          p.textContent =
+            paragraph.trim();
+
+          element.appendChild(p);
+
+        });
+      }
+
+
+      renderMessage(
+        $("#mainMessage"),
+        rakhiData.mainMessage
+      );
+
+
+      renderMessage(
+        $("#finalMessage"),
+        rakhiData.finalMessage
+      );
+
+
+      $("#message1").textContent =
+        rakhiData.messages[0];
+
+      $("#message2").textContent =
+        rakhiData.messages[1];
+
+      $("#message3").textContent =
+        rakhiData.messages[2];
+
+      $("#brotherName").textContent =
+        rakhiData.brotherName;
+
+
+      /*
+        ---------------------------------------------------------------
+        AMBIENT ANIMATION
+        ---------------------------------------------------------------
+      */
+
+      function makeAmbient(scene) {
+
+        const ambient =
+          $(".ambient", scene);
+
+        if (!ambient) return;
+
+
+        const items = [
+          ["spark","✦",12],
+          ["spark","·",16],
+          ["heart","♡",8],
+          ["heart","♥",4],
+          ["petal","",5]
+        ];
+
+
+        items.forEach(
+          ([cls,char,count]) => {
+
+            for (
+              let i = 0;
+              i < count;
+              i++
+            ) {
+
+              const el =
+                document.createElement("span");
+
+              el.className = cls;
+
+              if (char)
+                el.textContent = char;
+
+
+              el.style.left =
+                (Math.random() * 100) + "%";
+
+              el.style.top =
+                (Math.random() * 100) + "%";
+
+              el.style.animationDelay =
+                (Math.random() * 7) + "s";
+
+              el.style.animationDuration =
+                (5 + Math.random() * 8) + "s";
+
+
+              if (cls === "spark") {
+
+                el.style.fontSize =
+                  (8 + Math.random() * 12) + "px";
+
+              }
+
+
+              ambient.appendChild(el);
+
+            }
+
+          }
+        );
+
+      }
+
+
+      stages.forEach(makeAmbient);
+
+      makeAmbient(galleryStage);
+
+
+      /*
+        ---------------------------------------------------------------
+        STAGE NAVIGATION
+        ---------------------------------------------------------------
+      */
+
+      function showStage(number) {
+
+        const current =
+          stages.find(
+            s => !s.classList.contains("hidden")
+          );
+
+
+        const next =
+          stages.find(
+            s => Number(s.dataset.stage) === number
+          );
+
+
+        if (!next || next === current)
+          return;
+
+
+        if (current) {
+
+          current.classList.add("exit");
+
+
+          setTimeout(() => {
+
+            current.classList.add("hidden");
+
+            current.classList.remove("exit");
+
+            next.classList.remove("hidden");
+
+            animateEntry(next);
+
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+
+          }, 400);
+
+        } else {
+
+          next.classList.remove("hidden");
+
+          animateEntry(next);
+
+        }
+
+
+        progress.textContent =
+          `${number} / 5 · ${
+            number === 5 ? "♡" : "✦"
+          }`;
+
+      }
+
+
+      function animateEntry(scene) {
+
+        const inner =
+          $(".scene-inner, .story-card, .gallery-intro, .final-card", scene);
+
+
+        if (inner) {
+
+          inner.classList.remove("enter");
+
+          void inner.offsetWidth;
+
+          inner.classList.add("enter");
+
+        }
+
+      }
+
+
+      $$("[data-next]").forEach(btn => {
+
+        btn.addEventListener(
+          "click",
+          () => {
+
+            const currentNumber =
+              Number(
+                stages.find(
+                  s => !s.classList.contains("hidden")
+                ).dataset.stage
+              );
+
+
+            if (currentNumber < 5)
+              showStage(currentNumber + 1);
+
+          }
+        );
+
+      });
+
+
+      /*
+        ---------------------------------------------------------------
+        GIFT OPENING
+        ---------------------------------------------------------------
+      */
+
+      const gift =
+        $("#gift");
+
+
+      const openGift = () =>
+        gift.classList.toggle("open");
+
+
+      gift.addEventListener(
+        "click",
+        openGift
+      );
+
+
+      gift.addEventListener(
+        "keydown",
+        e => {
+
+          if (
+            e.key === "Enter" ||
+            e.key === " "
+          ) {
+
+            e.preventDefault();
+
+            openGift();
+
+          }
+
+        }
+      );
+
+
+      /*
+        ---------------------------------------------------------------
+        GIF RENDERING
+        ---------------------------------------------------------------
+      */
+
+      function renderGif(slotId,url) {
+
+        if (!url)
+          return;
+
+
+        const slot =
+          $(slotId);
+
+
+        if (!slot)
+          return;
+
+
+        slot.innerHTML = "";
+
+
+        const img =
+          document.createElement("img");
+
+
+        img.src = url;
+
+        img.alt =
+          "Rakhi surprise GIF";
+
+        img.loading =
+          "lazy";
+
+
+        slot.appendChild(img);
+
+      }
+
+
+      renderGif(
+        "#gifSlot1",
+        rakhiData.gifs[0]
+      );
+
+
+      renderGif(
+        "#gifSlot2",
+        rakhiData.gifs[1]
+      );
+
+
+      /*
+        ---------------------------------------------------------------
+        MEMORY GALLERY
+        ---------------------------------------------------------------
+      */
+
+      const gallery =
+        $("#gallery");
+
+
+      const tilts = [
+        -2.2,
+        2.1,
+        -0.8,
+        1.7,
+        -1.5,
+        1.1
+      ];
+
+
+      rakhiData.photos.forEach(
+        (photo,index) => {
+
+          const card =
+            document.createElement("article");
+
+
+          card.className =
+            "polaroid";
+
+
+          card.style.setProperty(
+            "--tilt",
+            `${tilts[index % tilts.length]}deg`
+          );
+
+
+          card.tabIndex = 0;
+
+
+          card.setAttribute(
+            "role",
+            "button"
+          );
+
+
+          card.setAttribute(
+            "aria-label",
+            `Open memory photo ${String(index + 1).padStart(2,"0")}`
+          );
+
+
+          const frame =
+            document.createElement("div");
+
+
+          frame.className =
+            "photo-placeholder";
+
+
+          if (photo.src) {
+
+            const img =
+              document.createElement("img");
+
+
+            img.src =
+              photo.src;
+
+
+            img.alt =
+              `Sibling memory photo ${String(index + 1).padStart(2,"0")}`;
+
+
+            img.loading =
+              "lazy";
+
+
+            frame.appendChild(img);
+
+          } else {
+
+            frame.textContent =
+              `PHOTO ${String(index + 1).padStart(2,"0")}`;
+
+            frame.setAttribute(
+              "aria-label",
+              `Photo ${String(index + 1).padStart(2,"0")} placeholder`
+            );
+
+          }
+
+
+          const note =
+            document.createElement("div");
+
+
+          note.className =
+            "note";
+
+
+          note.textContent =
+            photo.note;
+
+
+          card.append(
+            frame,
+            note
+          );
+
+
+          gallery.appendChild(card);
+
+
+          const open = () =>
+            openLightbox(photo,index);
+
+
+          card.addEventListener(
+            "click",
+            open
+          );
+
+
+          card.addEventListener(
+            "keydown",
+            e => {
+
+              if (
+                e.key === "Enter" ||
+                e.key === " "
+              ) {
+
+                e.preventDefault();
+
+                open();
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+      /*
+        ---------------------------------------------------------------
+        PHOTO LIGHTBOX
+        ---------------------------------------------------------------
+      */
+
+      function openLightbox(photo,index) {
+
+        modalMedia.innerHTML = "";
+
+
+        if (photo.src) {
+
+          const img =
+            document.createElement("img");
+
+
+          img.className =
+            "modal-media";
+
+
+          img.src =
+            photo.src;
+
+
+          img.alt =
+            `Sibling memory photo ${String(index + 1).padStart(2,"0")}`;
+
+
+          modalMedia.appendChild(img);
+
+        } else {
+
+          const placeholder =
+            document.createElement("div");
+
+
+          placeholder.className =
+            "photo-placeholder";
+
+
+          placeholder.style.minHeight =
+            "45svh";
+
+
+          placeholder.textContent =
+            `PHOTO ${String(index + 1).padStart(2,"0")} PLACEHOLDER`;
+
+
+          modalMedia.appendChild(
+            placeholder
+          );
+
+        }
+
+
+        modalNote.textContent =
+          photo.note;
+
+
+        lightbox.classList.add(
+          "open"
+        );
+
+
+        document.body.style.overflow =
+          "hidden";
+
+
+        $("#closeModal").focus();
+
+      }
+
+
+      function closeLightbox() {
+
+        lightbox.classList.remove(
+          "open"
+        );
+
+
+        document.body.style.overflow =
+          "";
+
+      }
+
+
+      $("#closeModal").addEventListener(
+        "click",
+        closeLightbox
+      );
+
+
+      lightbox.addEventListener(
+        "click",
+        e => {
+
+          if (
+            e.target === lightbox
+          )
+            closeLightbox();
+
+        }
+      );
+
+
+      document.addEventListener(
+        "keydown",
+        e => {
+
+          if (e.key === "Escape")
+            closeLightbox();
+
+        }
+      );
+
+
+      /*
+        ---------------------------------------------------------------
+        FINAL SURPRISE
+        ---------------------------------------------------------------
+      */
+
+      $("#finalBtn").addEventListener(
+        "click",
+        () => {
+
+          const current =
+            stages.find(
+              s => !s.classList.contains("hidden")
+            );
+
+
+          current.classList.add(
+            "exit"
+          );
+
+
+          setTimeout(() => {
+
+            current.classList.add(
+              "hidden"
+            );
+
+
+            current.classList.remove(
+              "exit"
+            );
+
+
+            galleryStage.classList.remove(
+              "hidden"
+            );
+
+
+            progress.textContent =
+              "5 / 5 · ❤️";
+
+
+            animateEntry(
+              galleryStage
+            );
+
+
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+
+          }, 500);
+
+        }
+      );
+
+
+      /*
+        ---------------------------------------------------------------
+        OPTIONAL BACKGROUND MUSIC
+        ---------------------------------------------------------------
+      */
+
+      if (rakhiData.musicUrl) {
+
+        bgMusic.src =
+          rakhiData.musicUrl;
+
+        musicBtn.disabled =
+          false;
+
+      } else {
+
+        musicBtn.disabled =
+          true;
+
+        musicBtn.title =
+          "Add a musicUrl in rakhiData to enable music";
+
+        musicBtn.style.opacity =
+          ".55";
+
+      }
+
+
+      musicBtn.addEventListener(
+        "click",
+        async () => {
+
+          if (!rakhiData.musicUrl)
+            return;
+
+
+          try {
+
+            if (bgMusic.paused) {
+
+              await bgMusic.play();
+
+              musicBtn.textContent =
+                "⏸️";
+
+              musicBtn.setAttribute(
+                "aria-label",
+                "Pause background music"
+              );
+
+            } else {
+
+              bgMusic.pause();
+
+              musicBtn.textContent =
+                "🎵";
+
+              musicBtn.setAttribute(
+                "aria-label",
+                "Play background music"
+              );
+
+            }
+
+          } catch {
+
+            musicBtn.textContent =
+              "🎵";
+
+          }
+
+        }
+      );
+
+    })();
+  </script>
+
+</body>
+</html>
